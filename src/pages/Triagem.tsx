@@ -107,10 +107,24 @@ const Triagem = () => {
     });
   };
 
+  // Get AI provider config
+  const getAIConfig = () => {
+    const saved = localStorage.getItem("alphacode-ai-provider-config");
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Error loading AI config:", e);
+      }
+    }
+    return { selectedProvider: "lovable", selectedModel: "google/gemini-2.5-flash", apiKey: "" };
+  };
+
   const handleAnalyze = async () => {
     if (assets.length === 0 || !selectedHorario) return;
     
     setIsAnalyzing(true);
+    const aiConfig = getAIConfig();
     
     try {
       const analyzed: AnalyzedAsset[] = [];
@@ -129,6 +143,9 @@ const Triagem = () => {
               body: JSON.stringify({
                 imageBase64: base64,
                 mimeType: asset.file.type,
+                provider: aiConfig.selectedProvider,
+                model: aiConfig.selectedModel,
+                apiKey: aiConfig.apiKey,
               }),
             });
 

@@ -26,7 +26,8 @@ import {
   MoreVertical,
   AlertTriangle,
   Captions,
-  Disc3
+  Disc3,
+  Brain
 } from "lucide-react";
 import CommandLayout from "@/components/layout/CommandLayout";
 import { Button } from "@/components/ui/button";
@@ -54,6 +55,7 @@ import {
 } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import AIProviderSettings from "@/components/settings/AIProviderSettings";
 
 interface PostReference {
   example: string;
@@ -827,7 +829,7 @@ const BrandSettings = () => {
 
         {/* Tabbed Settings */}
         <Tabs defaultValue="identidade" className="space-y-4 md:space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-muted/50 p-1">
+          <TabsList className="grid w-full grid-cols-4 bg-muted/50 p-1">
             <TabsTrigger value="identidade" className="text-xs data-[state=active]:bg-primary/20 data-[state=active]:text-primary flex flex-col gap-0.5 py-2">
               <div className="flex items-center">
                 <User className="w-3 h-3 mr-1" />
@@ -871,6 +873,12 @@ const BrandSettings = () => {
                   />
                 </div>
                 <span className="text-[9px] text-muted-foreground">{midiaProgress.filled}/{midiaProgress.total}</span>
+              </div>
+            </TabsTrigger>
+            <TabsTrigger value="ia" className="text-xs data-[state=active]:bg-accent/20 data-[state=active]:text-accent-foreground flex flex-col gap-0.5 py-2">
+              <div className="flex items-center">
+                <Brain className="w-3 h-3 mr-1" />
+                IA
               </div>
             </TabsTrigger>
           </TabsList>
@@ -2050,6 +2058,24 @@ const BrandSettings = () => {
                   </div>
                 </div>
               </div>
+            </motion.div>
+          </TabsContent>
+
+          {/* TAB 4: IA */}
+          <TabsContent value="ia" className="space-y-4 md:space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <div className="mb-4">
+                <h2 className="text-base md:text-lg font-semibold text-card-foreground mb-1">
+                  Configurações de IA
+                </h2>
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  Escolha o provedor de inteligência artificial para análise de imagens
+                </p>
+              </div>
+              <AIProviderSettings />
             </motion.div>
           </TabsContent>
         </Tabs>
