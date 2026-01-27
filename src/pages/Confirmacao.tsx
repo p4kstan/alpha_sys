@@ -8,12 +8,13 @@ import {
   BookOpen,
   Mic,
   Hash,
-  MessageSquare
+  MessageSquare,
+  Zap
 } from "lucide-react";
 import CommandLayout from "@/components/layout/CommandLayout";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import { toast } from "@/hooks/use-toast";
 interface AnalyzedAsset {
   id: string;
   description: string;
@@ -76,6 +77,14 @@ const Confirmacao = () => {
 
   const assets = state?.assets || [];
   const horario = state?.horario || "";
+
+  useEffect(() => {
+    // Show system active toast on mount
+    toast({
+      title: "Sistema Ativo",
+      description: "Lovable Cloud conectado e operacional.",
+    });
+  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem("alphacode-brand-settings");
