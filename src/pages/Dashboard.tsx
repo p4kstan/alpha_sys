@@ -6,7 +6,8 @@ import {
   CheckCircle2,
   Activity,
   Layers,
-  Settings
+  Settings,
+  CalendarDays
 } from "lucide-react";
 import CommandLayout from "@/components/layout/CommandLayout";
 import MetricCard from "@/components/dashboard/MetricCard";
@@ -140,13 +141,22 @@ const Dashboard = () => {
             Ações Rápidas
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             <motion.div variants={itemVariants}>
               <ActionCard
                 icon={Target}
                 title="Nova Triagem"
                 description="Inicie o processo de análise e geração de conteúdo"
                 to="/triagem"
+                variant="primary"
+              />
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <ActionCard
+                icon={CalendarDays}
+                title="Agendamento em Massa"
+                description="Organize e processe conteúdo da semana/mês inteiro"
+                to="/agendamento"
                 variant="primary"
               />
             </motion.div>

@@ -8,6 +8,7 @@ import Triagem from "@/pages/Triagem";
 import Confirmacao from "@/pages/Confirmacao";
 import Geracao from "@/pages/Geracao";
 import BrandSettings from "@/pages/BrandSettings";
+import Agendamento from "@/pages/Agendamento";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/triagem" element={<Triagem />} />
           <Route path="/confirmacao" element={<Confirmacao />} />
           <Route path="/geracao" element={<Geracao />} />
+          <Route path="/agendamento" element={<Agendamento />} />
           <Route path="/configuracoes" element={<BrandSettings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

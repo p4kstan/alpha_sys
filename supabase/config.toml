@@ -1,1 +1,4 @@
 project_id = "qjrknlbnyjrhjuftcebo"
+
+[functions.batch-process]
+verify_jwt = false
