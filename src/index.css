@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AlphaCode Supremacy Design System
+   A blacked-out cinematic command center for spiritual warfare.
+   All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Core Palette - Dark Command Center */
+    --background: 0 0% 7%; /* #121212 Jet Black */
+    --foreground: 80 100% 70%; /* AlphaCode Green text */
+    
+    /* Obsidian surfaces */
+    --card: 0 0% 6%; /* #0F0F0F Obsidian Black */
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+    
+    /* AlphaCode Green - Primary tactical accent */
+    --primary: 80 100% 70%; /* #C9FF65 */
+    --primary-foreground: 0 0% 6%;
+    
+    /* Electric Citadel - CTA highlights */
+    --secondary: 66 100% 51%; /* #CFFF04 */
+    --secondary-foreground: 0 0% 6%;
+    
+    /* Muted elements */
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
+    
+    /* Accent glow */
+    --accent: 80 100% 70%;
+    --accent-foreground: 0 0% 6%;
+    
+    /* Semantic States */
+    --success: 142 69% 58%; /* #4ADE80 */
+    --success-foreground: 0 0% 6%;
+    
+    --warning: 45 93% 54%; /* #FACC15 */
+    --warning-foreground: 0 0% 6%;
+    
+    --destructive: 0 84% 71%; /* #F87171 */
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 0 0% 18%;
+    --input: 0 0% 12%;
+    --ring: 80 100% 70%;
+    
+    --radius: 0.5rem;
+    
+    /* Custom AlphaCode variables */
+    --glow-primary: 80 100% 70%;
+    --glow-citadel: 66 100% 51%;
+    
+    /* Sidebar - Command Panel */
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 80 100% 70%;
+    --sidebar-primary-foreground: 0 0% 6%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 80 100% 70%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 80 100% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+  
+  /* Typography Hierarchy */
+  h1 {
+    @apply text-2xl font-bold tracking-wide;
+    letter-spacing: 0.05em;
+  }
+  
+  h2 {
+    @apply text-xl font-semibold tracking-wide;
+    letter-spacing: 0.04em;
+  }
+  
+  h3 {
+    @apply text-lg font-medium tracking-normal;
+  }
+  
+  p {
+    @apply text-base leading-relaxed;
+  }
+  
+  .caption {
+    @apply text-[13px] text-muted-foreground;
+  }
+}
+
+@layer components {
+  /* Tactical glow effects */
+  .glow-primary {
+    box-shadow: 0 0 20px hsla(80, 100%, 70%, 0.3),
+                0 0 40px hsla(80, 100%, 70%, 0.1);
+  }
+  
+  .glow-citadel {
+    box-shadow: 0 0 20px hsla(66, 100%, 51%, 0.4),
+                0 0 40px hsla(66, 100%, 51%, 0.15);
+  }
+  
+  .glow-success {
+    box-shadow: 0 0 20px hsla(142, 69%, 58%, 0.3),
+                0 0 40px hsla(142, 69%, 58%, 0.1);
+  }
+  
+  .glow-pulse {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  
+  /* Command card styling */
+  .command-card {
+    @apply bg-card border border-border rounded-lg p-6;
+    background: linear-gradient(
+      145deg,
+      hsl(0, 0%, 8%) 0%,
+      hsl(0, 0%, 5%) 100%
+    );
+  }
+  
+  /* Grid overlay effect */
+  .grid-overlay {
+    background-image: 
+      linear-gradient(hsla(0, 0%, 15%, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(0, 0%, 15%, 0.1) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  
+  /* Scan line effect */
+  .scan-lines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsla(0, 0%, 0%, 0.03) 2px,
+      hsla(0, 0%, 0%, 0.03) 4px
+    );
+    pointer-events: none;
+  }
+  
+  /* Status indicator */
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+    animation: statusPulse 2s ease-in-out infinite;
+  }
+  
+  .status-dot.active {
+    @apply bg-success;
+  }
+  
+  .status-dot.warning {
+    @apply bg-warning;
+  }
+  
+  .status-dot.error {
+    @apply bg-destructive;
+  }
+}
+
+@layer utilities {
+  /* Tactical border accent */
+  .border-tactical {
+    border-left: 2px solid hsl(80, 100%, 70%);
+  }
+  
+  /* Text glow */
+  .text-glow {
+    text-shadow: 0 0 10px hsla(80, 100%, 70%, 0.5);
+  }
+  
+  /* Fade in animation */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  /* Scale in */
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out forwards;
+  }
+  
+  /* Slide up */
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out forwards;
+  }
+  
+  /* Spring modal */
+  .animate-spring-in {
+    animation: springIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+}
+
+/* Keyframes */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px hsla(80, 100%, 70%, 0.3),
+                0 0 40px hsla(80, 100%, 70%, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px hsla(80, 100%, 70%, 0.5),
+                0 0 60px hsla(80, 100%, 70%, 0.2);
+  }
+}
+
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes springIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 8%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 25%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsla(80, 100%, 70%, 0.5);
+}
