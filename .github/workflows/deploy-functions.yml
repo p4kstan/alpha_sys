@@ -1,0 +1,62 @@
+name: Deploy Supabase Functions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Desktop/PROJETO TRACK/trace-ly-main/supabase/functions/**"
+      - ".github/workflows/deploy-functions.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Deploy all edge functions
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          PROJECT=xpgsipmyrwyjerjvbhmb
+          FUNCTIONS=(
+            event-router
+            process-events
+            google-ads-capi
+            ga4-events
+            gateway-webhook
+            gtm-server-events
+            mcp
+            ml-attribution
+            optimization-engine
+            predictive-analytics
+            meta-capi
+            tiktok-events
+            track
+            system-diagnostic
+            google-ads-reports
+            google-ads-oauth-callback
+            google-ads-oauth-initiate
+            google-ads-mutate
+            google-ads-sync
+            google-ads-credentials-status
+          )
+          cd "Desktop/PROJETO TRACK/trace-ly-main"
+          for fn in "${FUNCTIONS[@]}"; do
+            if [ -d "supabase/functions/$fn" ]; then
+              echo "Deploying $fn..."
+              supabase functions deploy "$fn" --project-ref "$PROJECT" --no-verify-jwt 2>/dev/null || \
+              supabase functions deploy "$fn" --project-ref "$PROJECT"
+            fi
+          done
+          echo "All functions deployed!"
+
+      - name: Apply SQL migrations
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          cd "Desktop/PROJETO TRACK/trace-ly-main"
+          supabase db push --project-ref xpgsipmyrwyjerjvbhmb 2>/dev/null || echo "Migration push skipped"
