@@ -1,4 +1,5 @@
 name: Deploy Supabase Functions
+# last-deploy: 2026-04-25
 
 on:
   push:
